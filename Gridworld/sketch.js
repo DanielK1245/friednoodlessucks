@@ -1,4 +1,5 @@
 let field
+let player1
 
 
 function setup(){
@@ -8,13 +9,15 @@ function setup(){
   field.initialize()
   field.createMaze1()
   player1 = new Player()
-  player1.init(10,10,2)
+  player1.init(10,10,2, field.field)
 
 }
 
 function draw(){
-  field.drawMaze()
-  player1.sense(field)
+  background(0)
+  player1.sense(field.field)
   player1.decide()
-  player1.act()
+  player1.act(field.field)
+  field.drawMaze()
+
 }
