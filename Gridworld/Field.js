@@ -6,6 +6,7 @@ function Field() {
   this.xpos = 0
   this.ypos = 0
 
+
   this.setup = function(x, y, w, xpos, ypos) {
     this.w = w;
     this.column = floor(x / w)
@@ -40,7 +41,15 @@ function Field() {
       this.field[this.column - 1][i] = 1
     }
     //walls ^
+  }
 
+  this.paint = function() {
+    if(this.confirm) return
+     if (mouseIsPressed) {
+        let i = floor((mouseX - this.xpos) / this.w)
+        let j = floor((mouseY - this.ypos) / this.w)
+        if ((i >= 0 && i < this.column) && (j >= 0 && j < this.row)) this.field[i][j] = 1
+     }
   }
 
   this.drawMaze = function() {
