@@ -43,12 +43,12 @@ function Field() {
     //walls ^
   }
 
-  this.paint = function() {
+  this.paint = function(x, y) {
     if(this.confirm) return
      if (mouseIsPressed) {
         let i = floor((mouseX - this.xpos) / this.w)
         let j = floor((mouseY - this.ypos) / this.w)
-        if ((i >= 0 && i < this.column) && (j >= 0 && j < this.row)) this.field[i][j] = 1
+        if ((i >= 0 && i < this.column) && (j >= 0 && j < this.row) && (i != x) && (j != y)) this.field[i][j] = 1
      }
   }
 

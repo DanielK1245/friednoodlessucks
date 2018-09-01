@@ -24,7 +24,7 @@ function Player() {
   }
 
   this.doAll = function(field) {
-    if(this.confirm == false) return
+    if(!this.confirm) return
     this.sense(field)
     this.decide()
     this.act(field)

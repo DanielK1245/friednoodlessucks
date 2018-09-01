@@ -22,6 +22,7 @@ function setup() {
 
 function draw() {
   field.paint()
+  field.drawMaze()
   if (frameCount % 40 == 1) {
     background(0)
     player1.doAll(field.field)
