@@ -1,4 +1,4 @@
-function Player(){
+function Player() {
   this.surroundings = new Array(8)
   this.x1 = false
   this.x2 = false
@@ -7,71 +7,80 @@ function Player(){
   this.x = 0
   this.y = 0
   this.id = 0
+  this.confirm = false
 
-
-  this.init = function(x, y, id, field){
+  this.init = function(x, y, id, field) {
     this.id = id
     this.x = x
     this.y = y
     field[this.x][this.y] = 2
-    for(let i = 0; i < this.surroundings.length; i++){
+    for (let i = 0; i < this.surroundings.length; i++) {
       this.surroundings[i] = 0
     }
 
   }
 
-  this.identity = function(){
+  this.identity = function() {
     return this.id
   }
 
-  this.sense = function(field){
-    for (let a = -1; a <= 1; a++) {
-       for (let b = -1; b <= 1; b++) {
-         if(a != 0 && b!= 0){
-           let inc = 0
-           console.log(inc)
-           this.surroundings[inc++] = field[this.x+a][this.y+b]
+  this.doAll = function(field) {
+    this.sense(field)
+    this.decide()
+    this.act(field)
+  }
 
-         }
-       }
+  this.sense = function(field) {
+    let inc = 0
+    for (let a = -1; a <= 1; a++) {
+      for (let b = -1; b <= 1; b++) {
+        if (!(a == 0 && b == 0)) {
+          this.surroundings[inc++] = field[this.x + a][this.y + b]
+        }
+      }
     }
   }
 
-  this.decide = function(){
-    if(this.surroundings[3] == 1 || this.surroundings[5] == 1){
+  this.decide = function() {
+    console.log(this.surroundings)
+    if (this.surroundings[3] == 1 || this.surroundings[5] == 1) {
       this.x1 = true
-    }
-    if(this.surroundings[6] == 1 || this.surroundings[7] == 1){
+    } else if (this.surroundings[4] == 1 || this.surroundings[7] == 1) {
       this.x2 = true
-    }
-    if(this.surroundings[2] == 1 || this.surroundings[4] == 1){
+    } else if (this.surroundings[5] == 1 || this.surroundings[6] == 1) {
       this.x3 = true
-    }
-    if(this.surroundings[0] == 1 || this.surroundings[1] == 1){
+    } else if (this.surroundings[3] == 1 || this.surroundings[0] == 1) {
       this.x4 = true
     }
   }
 
-  this.act = function(field){
-    if(this.x1 == true && this.x2 == false){
-      field[this.x++][this.y] = 2
+  this.act = function(field) {
+    if (this.x1 && !this.x2) {
       field[this.x][this.y] = 0
-    }
-    else if(this.x2 == true && this.x3 == false){
-      field[this.x][this.y++] = 2
+      field[++this.x][this.y] = 2
+      console.log(1)
+      this.x1 = false
+    } else if (this.x2 && !this.x3) {
       field[this.x][this.y] = 0
-    }
-    else if(this.x3 == true && this.x4 == false){
-      field[this.x--][this.y] = 2
+      field[this.x][++this.y] = 2
+      console.log(2)
+      this.x2 = false
+    } else if (this.x3 && !this.x4) {
       field[this.x][this.y] = 0
-    }
-    else if(this.x4 == true && this.x1 == false){
-      field[this.x][this.y--] = 2
+      field[--this.x][this.y] = 2
+      console.log(3)
+      this.x3 = false
+    } else if (this.x4 && !this.x1) {
       field[this.x][this.y] = 0
-    }
-    else{
-      field[this.x][this.y--] = 2
+      field[this.x][--this.y] = 2
+      console.log(4)
+      this.x4 = false
+    } else {
       field[this.x][this.y] = 0
+      field[this.x][--this.y] = 2
+      console.log(5)
+
     }
 
-  }}
+  }
+}
