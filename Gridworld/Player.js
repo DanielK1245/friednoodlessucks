@@ -31,6 +31,7 @@ function Player() {
   }
 
   this.sense = function(field) {
+    console.log(this.x+" "+this.y)
     let inc = 0
     for (let a = -1; a <= 1; a++) {
       for (let b = -1; b <= 1; b++) {

@@ -5,12 +5,16 @@ function Field() {
   this.field = []
   this.xpos = 0
   this.ypos = 0
+  this.x = 0
+  this.y = 0
 
 
   this.setup = function(x, y, w, xpos, ypos) {
-    this.w = w;
-    this.column = floor(x / w)
-    this.row = floor(y / w)
+    this.w = w
+    this.x = x
+    this.y = y
+    this.column = floor(this.x / w)
+    this.row = floor(this.y / w)
     this.field = new Array(this.column)
     this.xpos = xpos
     this.ypos = ypos
