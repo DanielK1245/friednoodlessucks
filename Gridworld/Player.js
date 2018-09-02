@@ -32,8 +32,6 @@ function Player() {
 
   this.sense = function(field) {
     let inc = 0
-    console.log(this.x)
-    console.log(this.y)
     for (let a = -1; a <= 1; a++) {
       for (let b = -1; b <= 1; b++) {
         if (!(a == 0 && b == 0)) {
@@ -45,13 +43,13 @@ function Player() {
   }
 
   this.decide = function() {
-    if (this.surroundings[3] == 1 || this.surroundings[5] == 1) {
+    if (this.surroundings[3] >= 1 || this.surroundings[5] >= 1) {
       this.x1 = true
-    }if (this.surroundings[6] == 1 || this.surroundings[7] == 1) {
+    }if (this.surroundings[6] >= 1 || this.surroundings[7] >= 1) {
       this.x2 = true
-    }if (this.surroundings[4] == 1 || this.surroundings[2] == 1) {
+    }if (this.surroundings[4] >= 1 || this.surroundings[2] >= 1) {
       this.x3 = true
-    }if (this.surroundings[1] == 1 || this.surroundings[0] == 1) {
+    }if (this.surroundings[1] >= 1 || this.surroundings[0] >= 1) {
       this.x4 = true
     }
   }
@@ -77,6 +75,7 @@ function Player() {
       field[this.x][--this.y] = 2
       console.log(4)
       this.reset()
+    } else if (this.x1 && this.x2 && this.x3 && this.x4){
     } else {
       field[this.x][this.y] = 0
       field[this.x][--this.y] = 2

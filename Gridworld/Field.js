@@ -43,13 +43,31 @@ function Field() {
     //walls ^
   }
 
-  this.paint = function(x, y) {
+  this.paint = function(lockerRoom) {
     if(this.confirm) return
      if (mouseIsPressed) {
         let i = floor((mouseX - this.xpos) / this.w)
         let j = floor((mouseY - this.ypos) / this.w)
-        if ((i >= 0 && i < this.column) && (j >= 0 && j < this.row) && (i != x) && (j != y)) this.field[i][j] = 1
+        if(mouseButton == LEFT){
+          if ((i >= 0 && i < this.column) && (j >= 0 && j < this.row))
+            if(!this.noOverlap(lockerRoom, i, j))
+              this.field[i][j] = 1
+        }
+        if(mouseButton == RIGHT){
+          if ((i >= 0 && i < this.column) && (j >= 0 && j < this.row) && this.field[i][j] == 1)
+            if(!this.noOverlap(lockerRoom, i, j))
+              this.field[i][j] = 0
+        }
      }
+  }
+
+  this.noOverlap = function(lockerRoom, i, j){
+    let judge = false
+    for(let a = 0; a < lockerRoom.length; a++){
+      if(lockerRoom[a].x == i && lockerRoom[a].y == j)
+        judge = true
+    }
+    return judge
   }
 
   this.drawMaze = function() {
